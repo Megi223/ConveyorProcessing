@@ -9,11 +9,11 @@ public:
     Program();
     ~Program();
     void generateRandomNumbers();
+    void generateRandomOperations();
 
 private:
     
 };
-/*void generateRandomOperations();
-void initMenu();*/
+/*void initMenu();*/
 
 #endif
