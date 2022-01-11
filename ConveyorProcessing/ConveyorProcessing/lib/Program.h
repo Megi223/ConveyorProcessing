@@ -9,11 +9,8 @@ public:
     Program();
     ~Program();
     void generateRandomNumbers();
-    void generateRandomOperations();
-
-private:
-    
+    void generateRandomFunctions();
+    char initMenu();
 };
-/*void initMenu();*/
 
 #endif

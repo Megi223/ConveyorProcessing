@@ -1,0 +1,7 @@
+					Welcome to Conveyor Processing project!
+Please select one of the following options (by typing in the corresponding letter):
+N - See all numbers
+H - Change one number
+F - See all functions
+O - Change one function
+C - Do matrix calculation

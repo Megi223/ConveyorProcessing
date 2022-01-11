@@ -7,6 +7,9 @@ int main()
 {
     Program program;
     program.generateRandomNumbers();
-    program.generateRandomOperations();
+    program.generateRandomFunctions();
+    char input = program.initMenu();
+    cout << input;
+    
     return 0;
 }

@@ -2,14 +2,14 @@
 #include "Program.h"
 #include <iostream>
 #include <fstream>
-
-using namespace std;
+#include <string>
+//using namespace std;
 
 // For testing purposes min value and max value are set
 int const MIN_VALUE_NUMBERS = -100;
 int const MAX_VALUE_NUMBERS = 100;
-int const MIN_VALUE_OPERATIONS = 0;
-int const MAX_VALUE_OPERATIONS = 6;
+int const MIN_VALUE_FUNCTIONS = 0;
+int const MAX_VALUE_FUNCTIONS = 6;
 
 Program::Program()
 {
@@ -34,17 +34,29 @@ void Program::generateRandomNumbers()
 	numbers.close();
 }
 
-void Program::generateRandomOperations() {
-	fstream operations;
-	operations.open("./resources/operations.txt", std::fstream::out);
+void Program::generateRandomFunctions() {
+	fstream functions;
+	functions.open("./resources/functions.txt", std::fstream::out);
 	srand(time(0));
-	string operationsArr[7] = { "+","-","*","/","%","<<",">>" };
+	string functionsArr[7] = { "+","-","*","/","%","<<",">>" };
 	//For testing purposes , the number of generated random operations is reduced to 6
 	for (int i = 0; i < 7; i++) {
 		//Generates a random number in the range of 0 to 6 - because we have 7 different possible operations
-		int random = rand() % (MAX_VALUE_OPERATIONS - MIN_VALUE_OPERATIONS + 1) + MIN_VALUE_OPERATIONS;
-		operations << operationsArr[random] << endl;
+		int random = rand() % (MAX_VALUE_FUNCTIONS - MIN_VALUE_FUNCTIONS + 1) + MIN_VALUE_FUNCTIONS;
+		functions << functionsArr[random] << endl;
 	}
-	operations.close();
+	functions.close();
+}
+
+char Program::initMenu() {
+	fstream welcome;
+	welcome.open("./resources/welcome.txt", std::fstream::in);
+	std::string buffer;
+	while (getline(welcome, buffer)) {
+		std::cout << buffer << "\n";
+	}
+	char input;
+	cin >> input;
+	return input;
 }
 
