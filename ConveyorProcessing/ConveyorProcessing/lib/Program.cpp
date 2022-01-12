@@ -48,14 +48,14 @@ void Program::generateRandomFunctions() {
 	functions.close();
 }
 
-char Program::initMenu() {
+string Program::initMenu() {
 	fstream welcome;
 	welcome.open("./resources/welcome.txt", std::fstream::in);
 	std::string buffer;
 	while (getline(welcome, buffer)) {
 		std::cout << buffer << "\n";
 	}
-	char input;
+	string input;
 	cin >> input;
 	return input;
 }

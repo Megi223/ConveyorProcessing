@@ -2,6 +2,7 @@
 #define PROGRAM
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 class Program {
@@ -10,7 +11,7 @@ public:
     ~Program();
     void generateRandomNumbers();
     void generateRandomFunctions();
-    char initMenu();
+    string initMenu();
 };
 
 #endif
