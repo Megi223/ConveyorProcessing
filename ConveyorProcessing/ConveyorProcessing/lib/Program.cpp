@@ -6,10 +6,10 @@
 //using namespace std;
 
 // For testing purposes min value and max value are set
-int const MIN_VALUE_NUMBERS = -100;
-int const MAX_VALUE_NUMBERS = 100;
-int const MIN_VALUE_FUNCTIONS = 0;
-int const MAX_VALUE_FUNCTIONS = 6;
+const double MIN_VALUE_NUMBERS = -100;
+const double MAX_VALUE_NUMBERS = 100;
+const int MIN_VALUE_FUNCTIONS = 0;
+const int MAX_VALUE_FUNCTIONS = 6;
 
 Program::Program()
 {
@@ -28,8 +28,9 @@ void Program::generateRandomNumbers()
 	//For testing purposes , the number of generated random numbers is reduced to 5
 	for (int i = 0; i < 5; i++) {
 		//Generates a random number in the range of min and max value
-		int random = rand() % (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS + 1) + MIN_VALUE_NUMBERS;
-		numbers << random << endl;
+		double random = (double)rand() / RAND_MAX;
+		double randomInRange = MIN_VALUE_NUMBERS + random * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
+		numbers << randomInRange << endl;
 	}
 	numbers.close();
 }
@@ -58,5 +59,23 @@ string Program::initMenu() {
 	string input;
 	cin >> input;
 	return input;
+}
+
+bool Program::checkNumberContains(double number) {
+	fstream numbers;
+	numbers.open("./resources/numbers.txt", std::fstream::in);
+	std::string buffer;
+	bool contains = false;
+	while (getline(numbers, buffer)) {
+		double parsedNumber = stod(buffer);
+		/*Because of the small differences in the numbers when comparing numbers 
+			of type double, a tolerance is needed*/
+		double difference = parsedNumber - number;
+		double positiveDiff = difference > 0 ? difference : (-1) * difference;
+		if (positiveDiff <= 0.0001) {
+			contains = true;
+		}
+	}
+	return contains;
 }
 
