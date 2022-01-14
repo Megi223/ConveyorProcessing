@@ -30,12 +30,39 @@ int main()
         do
         {
             cin >> currentNumber;
+            /* This is for the cases when the user writes symbols different 
+                from digits (ex.letters,special characters)*/
+            if (!cin) {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cout << "Sorry, this is invalid input! Please select a number!" << endl;
+                continue;
+            }
             contains = program.checkNumberContains(currentNumber);
             if (!contains) {
                 cout << "Sorry, this number is not part of the list. Please select a containing one!" << endl;
             }
-
         } while (!contains);
+        cout << "Great! Now please write your new number:" << endl;
+        bool successfulChange = false;
+        do
+        {
+            cin >> changedNumber;
+            /* This is for the cases when the user writes symbols different
+                from digits (ex.letters,special characters)*/
+            if (!cin) {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cout << "Sorry, this is invalid input! Please select a number!" << endl;
+                continue;
+            }
+            successfulChange = user.changeNumber(currentNumber, changedNumber);
+            if (!successfulChange) {
+                cout << "Sorry, an error occured. Please write your number again" << endl;
+            }
+
+        } while (!successfulChange);
+        cout << "You successfully changed the number " << currentNumber << " with " << changedNumber << endl;
     }
     
     return 0;

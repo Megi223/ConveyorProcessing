@@ -10,6 +10,7 @@ public:
     User();
     ~User();
     char validateInputStartMenu(string input);
+    bool changeNumber(double oldNum, double newNum);
 private: 
     int strLength(string str);
 };

@@ -72,7 +72,7 @@ bool Program::checkNumberContains(double number) {
 			of type double, a tolerance is needed*/
 		double difference = parsedNumber - number;
 		double positiveDiff = difference > 0 ? difference : (-1) * difference;
-		if (positiveDiff <= 0.0001) {
+		if (positiveDiff <= 0.00001) {
 			contains = true;
 		}
 	}
