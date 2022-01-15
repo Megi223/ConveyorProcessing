@@ -2,7 +2,7 @@
 #define PROGRAM
 
 #include <iostream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 class Program {
@@ -13,6 +13,7 @@ public:
     void generateRandomFunctions();
     string initMenu(bool first);
     bool checkNumberContains(double number);
+    void showNumbers();
 };
 
 #endif

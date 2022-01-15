@@ -77,6 +77,7 @@ string Program::initMenu(bool first) {
 	}
 	string input;
 	cin >> input;
+	commands.close();
 	return input;
 }
 
@@ -95,6 +96,19 @@ bool Program::checkNumberContains(double number) {
 			contains = true;
 		}
 	}
+	numbers.close();
 	return contains;
+}
+
+void Program::showNumbers() {
+	//ifstream numbers("./resources/numbers.txt");
+	cout << "The numbers are:" << endl;
+	fstream numbers;
+	numbers.open("./resources/numbers.txt", std::fstream::in);
+	std::string buffer;
+	while (getline(numbers, buffer)) {
+		cout << buffer << endl;
+	}
+	numbers.close();
 }
 

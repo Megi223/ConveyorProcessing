@@ -68,6 +68,13 @@ int main()
 
             } while (!successfulChange);
             cout << "You successfully changed the number " << currentNumber << " with " << changedNumber << endl;
+            cout << endl;
+            input = program.initMenu(false);
+            symbol = validInput(user, input);
+        }
+        else if (symbol == 'N' || symbol == 'n') {
+            program.showNumbers();
+            cout << endl;
             input = program.initMenu(false);
             symbol = validInput(user, input);
         }
