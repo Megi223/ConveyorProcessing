@@ -11,7 +11,7 @@ public:
     ~Program();
     void generateRandomNumbers();
     void generateRandomFunctions();
-    string initMenu();
+    string initMenu(bool first);
     bool checkNumberContains(double number);
 };
 

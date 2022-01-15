@@ -7,6 +7,7 @@
 
 // For testing purposes min value and max value are set
 const double MIN_VALUE_NUMBERS = -100;
+const double MIN_VALUE_POSITIVE_NUMBERS = 0;
 const double MAX_VALUE_NUMBERS = 100;
 const int MIN_VALUE_FUNCTIONS = 0;
 const int MAX_VALUE_FUNCTIONS = 6;
@@ -44,16 +45,34 @@ void Program::generateRandomFunctions() {
 	for (int i = 0; i < 7; i++) {
 		//Generates a random number in the range of 0 to 6 - because we have 7 different possible operations
 		int random = rand() % (MAX_VALUE_FUNCTIONS - MIN_VALUE_FUNCTIONS + 1) + MIN_VALUE_FUNCTIONS;
-		functions << functionsArr[random] << endl;
+		double floatingRandom = (double)rand() / RAND_MAX;
+		double floatingRandomInRange = MIN_VALUE_NUMBERS + random * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
+		int positiveIntegerRandom = rand() % ((int)MAX_VALUE_NUMBERS - (int)MIN_VALUE_POSITIVE_NUMBERS + 1) + (int)MIN_VALUE_POSITIVE_NUMBERS;
+		
+		if (functionsArr[random] == "%" || functionsArr[random] == ">>" || functionsArr[random] == "<<") {
+			functions << functionsArr[random] << positiveIntegerRandom << endl;
+		}
+		else if (functionsArr[random] == "/") {
+			while (positiveIntegerRandom == 0) {
+				int positiveIntegerRandom = rand() % ((int)MAX_VALUE_NUMBERS - (int)MIN_VALUE_POSITIVE_NUMBERS + 1) + (int)MIN_VALUE_POSITIVE_NUMBERS;
+			}
+			functions << functionsArr[random] << positiveIntegerRandom << endl;
+		}
+		else {
+			functions << functionsArr[random] << floatingRandomInRange << endl;
+		}
 	}
 	functions.close();
 }
 
-string Program::initMenu() {
-	fstream welcome;
-	welcome.open("./resources/welcome.txt", std::fstream::in);
+string Program::initMenu(bool first) {
+	if (first) {
+		cout << "Welcome to Conveyor Processing project!" << endl;
+	}
+	fstream commands;
+	commands.open("./resources/commands.txt", std::fstream::in);
 	std::string buffer;
-	while (getline(welcome, buffer)) {
+	while (getline(commands, buffer)) {
 		std::cout << buffer << "\n";
 	}
 	string input;

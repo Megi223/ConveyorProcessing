@@ -1,7 +1,7 @@
 #include "User.h"
 #include <iostream>
 #include <fstream>
-int const VALID_SYMBOLS_COUNT = 10;
+int const VALID_SYMBOLS_COUNT = 12;
 User::User()
 {
 }
@@ -26,7 +26,7 @@ char User::validateInputStartMenu(string input)
 		return 'e';
 	}
 	char symbol = input[0];
-	char validSymbols[VALID_SYMBOLS_COUNT] = { 'N', 'n', 'H', 'h', 'F', 'f', 'O', 'o', 'C', 'c' };
+	char validSymbols[VALID_SYMBOLS_COUNT] = { 'N', 'n', 'H', 'h', 'F', 'f', 'O', 'o', 'C', 'c', 'A', 'a' };
 	bool isValid = false;
 	for (int i = 0; i < VALID_SYMBOLS_COUNT; i++)
 	{
