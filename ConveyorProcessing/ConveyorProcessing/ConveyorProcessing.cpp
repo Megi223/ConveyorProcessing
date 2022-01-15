@@ -78,9 +78,13 @@ int main()
             input = program.initMenu(false);
             symbol = validInput(user, input);
         }
+        else if (symbol == 'F' || symbol == 'f') {
+            program.showFunctions();
+            cout << endl;
+            input = program.initMenu(false);
+            symbol = validInput(user, input);
+        }
     }
-    
-    
-    
+
     return 0;
 }

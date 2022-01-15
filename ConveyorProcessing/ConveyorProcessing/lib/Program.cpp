@@ -45,18 +45,21 @@ void Program::generateRandomFunctions() {
 	for (int i = 0; i < 7; i++) {
 		//Generates a random number in the range of 0 to 6 - because we have 7 different possible operations
 		int random = rand() % (MAX_VALUE_FUNCTIONS - MIN_VALUE_FUNCTIONS + 1) + MIN_VALUE_FUNCTIONS;
+		//Generates a double random number (as we can work with real numbers)
 		double floatingRandom = (double)rand() / RAND_MAX;
-		double floatingRandomInRange = MIN_VALUE_NUMBERS + random * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
+		double floatingRandomInRange = MIN_VALUE_NUMBERS + floatingRandom * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
+		//Generates a positive random integer for the cases where we can only work with such numbers
 		int positiveIntegerRandom = rand() % ((int)MAX_VALUE_NUMBERS - (int)MIN_VALUE_POSITIVE_NUMBERS + 1) + (int)MIN_VALUE_POSITIVE_NUMBERS;
 		
 		if (functionsArr[random] == "%" || functionsArr[random] == ">>" || functionsArr[random] == "<<") {
 			functions << functionsArr[random] << positiveIntegerRandom << endl;
 		}
 		else if (functionsArr[random] == "/") {
-			while (positiveIntegerRandom == 0) {
-				int positiveIntegerRandom = rand() % ((int)MAX_VALUE_NUMBERS - (int)MIN_VALUE_POSITIVE_NUMBERS + 1) + (int)MIN_VALUE_POSITIVE_NUMBERS;
+			//Since we cannot divide by zero, if the generated number is 0, we should change it
+			while (floatingRandomInRange == 0) {
+				floatingRandomInRange = MIN_VALUE_NUMBERS + floatingRandomInRange * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
 			}
-			functions << functionsArr[random] << positiveIntegerRandom << endl;
+			functions << functionsArr[random] << floatingRandomInRange << endl;
 		}
 		else {
 			functions << functionsArr[random] << floatingRandomInRange << endl;
@@ -66,6 +69,7 @@ void Program::generateRandomFunctions() {
 }
 
 string Program::initMenu(bool first) {
+	// If it is the first initialization of the menu, a title should be included too
 	if (first) {
 		cout << "Welcome to Conveyor Processing project!" << endl;
 	}
@@ -101,7 +105,6 @@ bool Program::checkNumberContains(double number) {
 }
 
 void Program::showNumbers() {
-	//ifstream numbers("./resources/numbers.txt");
 	cout << "The numbers are:" << endl;
 	fstream numbers;
 	numbers.open("./resources/numbers.txt", std::fstream::in);
@@ -110,5 +113,16 @@ void Program::showNumbers() {
 		cout << buffer << endl;
 	}
 	numbers.close();
+}
+
+void Program::showFunctions() {
+	cout << "The functions are:" << endl;
+	fstream functions;
+	functions.open("./resources/functions.txt", std::fstream::in);
+	std::string buffer;
+	while (getline(functions, buffer)) {
+		cout << buffer << endl;
+	}
+	functions.close();
 }
 

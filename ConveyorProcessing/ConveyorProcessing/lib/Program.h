@@ -14,6 +14,7 @@ public:
     string initMenu(bool first);
     bool checkNumberContains(double number);
     void showNumbers();
+    void showFunctions();
 };
 
 #endif
