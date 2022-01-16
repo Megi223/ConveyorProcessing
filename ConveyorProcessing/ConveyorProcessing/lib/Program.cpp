@@ -138,6 +138,9 @@ bool Program::validateFormat(string arr) {
 		for (int i = 1; i < length; i++)
 		{
 			char currentSymbol = arr[i];
+			if (i == 1 && currentSymbol == '-') {
+				continue;
+			}
 			// Checking if it is a digit or dot (ascii table values) - if it isn't- the input becomes invalid
 			if ((currentSymbol < 48 || currentSymbol > 57) && currentSymbol != '.') {
 				correct = false;
@@ -164,7 +167,7 @@ bool Program::validateFormat(string arr) {
 	return correct;
 }
 
-bool Program::checkFunctionContains(string func) {
+int Program::checkFunctionContains(string func) {
 	bool contains = false;
 	int length = func.size();
 	string numberStr;
@@ -195,8 +198,10 @@ bool Program::checkFunctionContains(string func) {
 		int number = stod(numberStr);
 		result = number;
 	}
-
+	int iter = 0;
+	int rowFound = -1;
 	while (getline(functions, buffer)) {
+		iter++;
 		char currentFunc = buffer[0];
 		string currentNumberStr;
 		if (currentFunc == '+' || currentFunc == '-' || currentFunc == '*' || currentFunc == '/' || currentFunc == '%') {
@@ -214,6 +219,7 @@ bool Program::checkFunctionContains(string func) {
 				double positiveDiff = difference > 0 ? difference : (-1) * difference;
 				if (positiveDiff <= 0.00001) {
 					contains = true;
+					rowFound = iter;
 					break;
 				}
 			}
@@ -228,11 +234,12 @@ bool Program::checkFunctionContains(string func) {
 			int currentNumber = stod(currentNumberStr);
 			if ((func[0]==currentFunc && func[1]==buffer[1]) && currentNumber == (int)result) {
 				contains = true;
+				rowFound = iter;
 				break;
 			}
 		}		
 	}
 	functions.close();
-	return contains;
+	return rowFound;
 }
 

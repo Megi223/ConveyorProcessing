@@ -89,7 +89,8 @@ int main()
             string funcToChange;
             cin >> funcToChange;
             bool correct = false;
-            bool contains = false;
+            // Represents the row in which the function can be found - if it is not part of the list this index will be -1 (invalid)
+            int contains = -1;
             do
             {
                correct = program.validateFormat(funcToChange);
@@ -99,27 +100,35 @@ int main()
                    continue;
                }
                contains = program.checkFunctionContains(funcToChange);
-               if (!contains) {
+               if (contains == -1) {
                    cout << "Sorry, this function is not part of the list. Please select a containing one!" << endl;
                    cin >> funcToChange;
                    continue;
                }
-            } while ((!correct) || (!contains));
-            
-            /*do
+            } while ((!correct) || (contains == -1));
+            cout << "Great! Now please write the new function:" << endl;
+            string newFunc;
+            cin >> newFunc;
+            bool formatCorrect = false;
+            do
             {
-                contains = program.checkFunctionContains(funcToChange);
-                if (!contains) {
-                    cout << "Sorry, this function is not part of the list. Please select a containing one!" << endl;
+                formatCorrect = program.validateFormat(funcToChange);
+                if (!correct) {
+                    cout << "Invalid format!" << endl;
+                    cin >> funcToChange;
                     continue;
                 }
-            } while (!contains);*/
-             
-            
+            } while (!formatCorrect);
+            bool successful = user.substituteFunction(newFunc, contains);
+            while (!successful) {
+                cout << "Sorry, an error occured." << endl;
+            }
+            if (successful) {
+                cout << "Congratulations! You successfully changed function " << funcToChange << " with " << newFunc << endl;
+            }
             cout << endl;
             input = program.initMenu(false);
             symbol = validInput(user, input);
-            
         }
     }
 

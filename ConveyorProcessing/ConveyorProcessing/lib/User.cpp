@@ -77,3 +77,37 @@ bool User::changeNumber(double oldNum,double newNum) {
 	return true;
 }
 
+bool User::substituteFunction(string newFunc, int row) {
+	std::string buffer;
+	//File to read from
+	ifstream filein("./resources/functions.txt");
+	//Temporary file to write new functions
+	ofstream fileout("./resources/tempFunctions.txt");
+	if (!filein || !fileout)
+	{
+		cout << "Error opening files!" << endl;
+		return false;
+	}
+	int counterRows = 0;
+	while (getline(filein, buffer)) {
+		counterRows++;
+		if (counterRows == row) {
+			fileout << newFunc << endl;
+		}
+		else {
+			fileout << buffer << endl;
+		}
+	}
+	filein.close();
+	fileout.close();
+	//If the file is successfully removed/renamed, a zero value is returned.
+	bool removeSuccessful = remove("./resources/functions.txt");
+	bool renameSuccessful = rename("./resources/tempFunctions.txt", "./resources/functions.txt");
+
+	if (removeSuccessful || renameSuccessful) {
+		return false;
+	}
+
+	return true;
+}
+

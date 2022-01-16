@@ -16,7 +16,7 @@ public:
     void showNumbers();
     void showFunctions();
     bool validateFormat(string str);
-    bool checkFunctionContains(string func);
+    int checkFunctionContains(string func);
 };
 
 #endif
