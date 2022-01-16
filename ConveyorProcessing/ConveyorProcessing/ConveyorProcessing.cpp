@@ -84,6 +84,43 @@ int main()
             input = program.initMenu(false);
             symbol = validInput(user, input);
         }
+        else if (symbol == 'O' || symbol == 'o') {
+            cout << "Okay! Now please write the function you want to change:" << endl;
+            string funcToChange;
+            cin >> funcToChange;
+            bool correct = false;
+            bool contains = false;
+            do
+            {
+               correct = program.validateFormat(funcToChange);
+               if (!correct) {
+                   cout << "Invalid format!" << endl;
+                   cin >> funcToChange;
+                   continue;
+               }
+               contains = program.checkFunctionContains(funcToChange);
+               if (!contains) {
+                   cout << "Sorry, this function is not part of the list. Please select a containing one!" << endl;
+                   cin >> funcToChange;
+                   continue;
+               }
+            } while ((!correct) || (!contains));
+            
+            /*do
+            {
+                contains = program.checkFunctionContains(funcToChange);
+                if (!contains) {
+                    cout << "Sorry, this function is not part of the list. Please select a containing one!" << endl;
+                    continue;
+                }
+            } while (!contains);*/
+             
+            
+            cout << endl;
+            input = program.initMenu(false);
+            symbol = validInput(user, input);
+            
+        }
     }
 
     return 0;

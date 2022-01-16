@@ -15,6 +15,8 @@ public:
     bool checkNumberContains(double number);
     void showNumbers();
     void showFunctions();
+    bool validateFormat(string str);
+    bool checkFunctionContains(string func);
 };
 
 #endif

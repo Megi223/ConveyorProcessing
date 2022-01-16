@@ -126,3 +126,113 @@ void Program::showFunctions() {
 	functions.close();
 }
 
+bool Program::validateFormat(string arr) {
+	bool correct = true;
+	int length = arr.size();
+	if (length < 2) {
+		correct = false;
+		return correct;
+	}
+	if (arr[0] == '+' || arr[0] == '-' || arr[0] == '*' || arr[0] == '/' || arr[0] == '%')
+	{
+		for (int i = 1; i < length; i++)
+		{
+			char currentSymbol = arr[i];
+			// Checking if it is a digit or dot (ascii table values) - if it isn't- the input becomes invalid
+			if ((currentSymbol < 48 || currentSymbol > 57) && currentSymbol != '.') {
+				correct = false;
+				break;
+			}
+		}
+	}
+	else if ((arr[0] == '>' && arr[1] == '>') || (arr[0] == '<' && arr[1] == '<')) {
+		// The next (length-2) symbols should be a valid number in order for the whole input to be valid
+		for (int i = 2; i < length; i++)
+		{
+			char currentSymbol = arr[i];
+			// Checking if it is a digit or dot (ascii table values) - if it isn't- the input becomes invalid
+			if (currentSymbol < 48 || currentSymbol > 57) {
+				correct = false;
+				break;
+			}
+		}
+	}
+	else {
+		// If it starts with other symbol- the input is invalid
+		correct = false;
+	}
+	return correct;
+}
+
+bool Program::checkFunctionContains(string func) {
+	bool contains = false;
+	int length = func.size();
+	string numberStr;
+	fstream functions;
+	functions.open("./resources/functions.txt", std::fstream::in);
+	std::string buffer;
+	double result = 0;
+	if (func[0] == '+' || func[0] == '-' || func[0] == '*' || func[0] == '/' || func[0] == '%') 
+	{
+		// Determining what is the number standing next to the symbol for the operation
+		for (int i = 1; i < length; i++)
+		{
+			numberStr += func[i];
+		}
+		// Converting it from string to double
+		double number = stod(numberStr);
+		result = number;
+		
+	}
+	// The operators ">>" and "<<" take up 2 characters and thus are separated into different cases
+	else if ((func[0] == '>' && func[1] == '>') || (func[0] == '<' && func[1] == '<')) {
+		// Determining what is the number standing next to the symbol for the operation
+		for (int i = 2; i < length; i++)
+		{
+			numberStr += func[i];
+		}
+		// Converting it from string to int (they work only with integers)
+		int number = stod(numberStr);
+		result = number;
+	}
+
+	while (getline(functions, buffer)) {
+		char currentFunc = buffer[0];
+		string currentNumberStr;
+		if (currentFunc == '+' || currentFunc == '-' || currentFunc == '*' || currentFunc == '/' || currentFunc == '%') {
+			if (currentFunc == func[0]) {
+				// Determining what is the number standing next to the symbol for the operation
+				for (int i = 1; i < length; i++)
+				{
+					currentNumberStr += buffer[i];
+				}
+				// Converting it from string to double
+				double currentNumber = stod(currentNumberStr);
+				/*Because of the small differences in the numbers when comparing numbers
+				of type double, a tolerance is needed*/
+				double difference = result - currentNumber;
+				double positiveDiff = difference > 0 ? difference : (-1) * difference;
+				if (positiveDiff <= 0.00001) {
+					contains = true;
+					break;
+				}
+			}
+		}
+		else if (currentFunc == '>' || currentFunc == '<') {
+			// Determining what is the number standing next to the symbol for the operation
+			for (int i = 2; i < length; i++)
+			{
+				currentNumberStr += buffer[i];
+			}
+			// Converting it from string to integer (they work only with integers)
+			int currentNumber = stod(currentNumberStr);
+			if ((func[0]==currentFunc && func[1]==buffer[1]) && currentNumber == (int)result) {
+				contains = true;
+				break;
+			}
+		}		
+	}
+	functions.close();
+	return contains;
+}
+
