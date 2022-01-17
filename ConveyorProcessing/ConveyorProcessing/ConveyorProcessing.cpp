@@ -131,6 +131,8 @@ int main()
             symbol = validInput(user, input);
         }
     }
-
+    if (symbol == 'A' || symbol == 'a') {
+        cout << "Thank you for using Conveyor Processing! I hope you had great experience." << endl;
+    }
     return 0;
 }

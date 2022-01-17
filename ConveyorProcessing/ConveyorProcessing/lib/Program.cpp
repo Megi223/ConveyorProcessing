@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 //using namespace std;
 
 // For testing purposes min value and max value are set
@@ -31,7 +32,8 @@ void Program::generateRandomNumbers()
 		//Generates a random number in the range of min and max value
 		double random = (double)rand() / RAND_MAX;
 		double randomInRange = MIN_VALUE_NUMBERS + random * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
-		numbers << randomInRange << endl;
+		// For testing purposes a limit to 2 decimal places is set
+		numbers << fixed << setprecision(2) << randomInRange << endl;
 	}
 	numbers.close();
 }
@@ -59,10 +61,10 @@ void Program::generateRandomFunctions() {
 			while (floatingRandomInRange == 0) {
 				floatingRandomInRange = MIN_VALUE_NUMBERS + floatingRandomInRange * (MAX_VALUE_NUMBERS - MIN_VALUE_NUMBERS);
 			}
-			functions << functionsArr[random] << floatingRandomInRange << endl;
+			functions << functionsArr[random] << fixed << setprecision(2) << floatingRandomInRange << endl;
 		}
 		else {
-			functions << functionsArr[random] << floatingRandomInRange << endl;
+			functions << functionsArr[random] << fixed << setprecision(2) << floatingRandomInRange << endl;
 		}
 	}
 	functions.close();
