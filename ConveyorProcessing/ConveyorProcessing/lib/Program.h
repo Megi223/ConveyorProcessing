@@ -17,6 +17,9 @@ public:
     void showFunctions();
     bool validateFormat(string str);
     int checkFunctionContains(string func);
+    void calcWithoutCarryMode(int formatInput, char saveFileInput);
+private:
+    void jsonSerializer(double** matrix);
 };
 
 #endif

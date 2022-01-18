@@ -130,6 +130,49 @@ int main()
             input = program.initMenu(false);
             symbol = validInput(user, input);
         }
+        else if (symbol == 'C' || symbol == 'c') {
+            /* When selecting this option the user will be able to choose from multiple 
+                other options regarding the output - first we clarify them and then 
+                we pass them as parameters in order to get the desired result*/
+            cout << "Great! But first let's clarify some options" << endl;
+            cout << "Would you like to activate carry mode? Please type in + for yes and - for no." << endl;
+            char inputCarryMode;
+            cin >> inputCarryMode;
+            while (inputCarryMode != '+' && inputCarryMode != '-')
+            {
+                cout << "Invalid symbol! Please type in + for yes and - for no.";
+                cin >> inputCarryMode;
+            }
+            cout << "Now let's choose the format of the output. Would you like it to be plain text or JSON?" << endl;
+            cout << "Please choose the corresponding option:" << endl;
+            cout << "1 - plain text" << endl;
+            cout << "2 - JSON" << endl;
+            int formatInput = 0;
+            cin >> formatInput;
+            while (cin.fail()) {
+                cout << "Invalid input! Please choose a number (either 1 or 2)." << endl;
+                cin >> formatInput;
+            }
+            while (formatInput != 1 && formatInput != 2) {
+                cout << "Invalid input! " << formatInput << " is neither 1 nor 2" << endl;
+                cin >> formatInput;
+            }
+            cout << "Fantastic! And finally- would you like to save the output as a file?" << endl;
+            cout << "Please type in + for yes and - for no." << endl;
+            char saveFileInput;
+            cin >> saveFileInput;
+            while (saveFileInput != '+' && saveFileInput != '-')
+            {
+                cout << "Invalid symbol! Please type in + for yes and - for no.";
+                cin >> saveFileInput;
+            }
+            if (inputCarryMode == '-') {
+                program.calcWithoutCarryMode(formatInput,saveFileInput);
+            }
+            cout << endl;
+            input = program.initMenu(false);
+            symbol = validInput(user, input);
+        }
     }
     if (symbol == 'A' || symbol == 'a') {
         cout << "Thank you for using Conveyor Processing! I hope you had great experience." << endl;
