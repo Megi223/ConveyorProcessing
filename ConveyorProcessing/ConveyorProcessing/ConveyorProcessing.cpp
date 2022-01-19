@@ -21,8 +21,8 @@ char validInput(User user,string input) {
 int main()
 {
     Program program;
-    program.generateRandomNumbers();
-    program.generateRandomFunctions();
+    //program.generateRandomNumbers();
+    //program.generateRandomFunctions();
     string input = program.initMenu(true);
     User user;
     char symbol = validInput(user,input);
@@ -168,6 +168,9 @@ int main()
             }
             if (inputCarryMode == '-') {
                 program.calcWithoutCarryMode(formatInput,saveFileInput);
+            }
+            else {
+                program.calcWithCarryMode(formatInput, saveFileInput);
             }
             cout << endl;
             input = program.initMenu(false);

@@ -18,6 +18,7 @@ public:
     bool validateFormat(string str);
     int checkFunctionContains(string func);
     void calcWithoutCarryMode(int formatInput, char saveFileInput);
+    void calcWithCarryMode(int formatInput, char saveFileInput);
 private:
     void jsonSerializer(double** matrix);
 };
