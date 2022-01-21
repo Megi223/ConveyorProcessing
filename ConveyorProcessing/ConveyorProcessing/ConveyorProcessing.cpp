@@ -3,6 +3,7 @@
 #include <cstring>
 #include "lib/Program.h"
 #include "lib/User.h"
+#include "lib/Calculation.h"
 
 char validInput(User user,string input) {
     char symbol;
@@ -21,10 +22,11 @@ char validInput(User user,string input) {
 int main()
 {
     Program program;
-    //program.generateRandomNumbers();
-    //program.generateRandomFunctions();
+    program.generateRandomNumbers();
+    program.generateRandomFunctions();
     string input = program.initMenu(true);
     User user;
+    Calculation calculation;
     char symbol = validInput(user,input);
     while (symbol != 'A' && symbol != 'a') {
         if (symbol == 'H' || symbol == 'h') {
@@ -167,10 +169,10 @@ int main()
                 cin >> saveFileInput;
             }
             if (inputCarryMode == '-') {
-                program.calcWithoutCarryMode(formatInput,saveFileInput);
+                calculation.calcWithoutCarryMode(formatInput,saveFileInput);
             }
             else {
-                program.calcWithCarryMode(formatInput, saveFileInput);
+                calculation.calcWithCarryMode(formatInput, saveFileInput);
             }
             cout << endl;
             input = program.initMenu(false);
