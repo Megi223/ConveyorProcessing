@@ -13,8 +13,93 @@ Calculation::~Calculation()
 {
 }
 
-void Calculation::jsonSerializer(double** matrix) {
-
+void Calculation::jsonSerializer(double** matrix,string path,int numbersCount,int functionsCount) {
+	fstream calc;
+	calc.open("./resources/calculation.txt", std::fstream::out);
+	calc << '{' << endl;
+	calc << "	\"byRows\": [" << endl;
+	for (int i = 0; i < numbersCount; i++)
+	{
+		calc << "		[";
+		for (int j = 0; j < functionsCount; j++)
+		{
+			if (trunc(matrix[i][j]) == matrix[i][j]) {
+				if (j == functionsCount - 1) {
+					calc << (int)matrix[i][j];
+				}
+				else {
+					calc << (int)matrix[i][j] << ", ";
+				}
+			}
+			else {
+				if (j == functionsCount - 1) {
+					calc << fixed << setprecision(2) << matrix[i][j];
+				}
+				else {
+					calc << fixed << setprecision(2) << matrix[i][j] << ", ";
+				}
+			}
+		}
+		if (i == numbersCount - 1) {
+			calc << ']';
+		}
+		else {
+			calc << "],";
+		}
+		calc << endl;
+	}
+	calc << "	]," << endl;
+	calc << "	\"byCols\": [" << endl;
+	// Finding the transponse matrix
+	double** transponseMatrix = new double*[functionsCount];
+	for (int i = 0; i < functionsCount; ++i) {
+		transponseMatrix[i] = new double[numbersCount];
+	}
+	for (int fCnt = 0; fCnt < functionsCount; fCnt++)
+	{
+		for (int nCnt = 0; nCnt < numbersCount; nCnt++)
+		{
+			transponseMatrix[fCnt][nCnt] = matrix[nCnt][fCnt];
+		}
+	}
+	for (int i = 0; i < functionsCount; i++)
+	{
+		calc << "		[";
+		for (int j = 0; j < numbersCount; j++)
+		{
+			if (trunc(transponseMatrix[i][j]) == transponseMatrix[i][j]) {
+				if (j == numbersCount - 1) {
+					calc << (int)transponseMatrix[i][j];
+				}
+				else {
+					calc << (int)transponseMatrix[i][j] << ", ";
+				}
+			}
+			else {
+				if (j == numbersCount - 1) {
+					calc << fixed << setprecision(2) << transponseMatrix[i][j];
+				}
+				else {
+					calc << fixed << setprecision(2) << transponseMatrix[i][j] << ", ";
+				}
+			}
+		}
+		if (i == functionsCount - 1) {
+			calc << ']';
+		}
+		else {
+			calc << "],";
+		}
+		calc << endl;
+	}
+	calc << "	]," << endl;
+	calc << '}' << endl;
+	calc.close();
+	for (int i = 0; i < functionsCount; i++)
+	{
+		delete[] transponseMatrix[i];
+	}
+	delete[] transponseMatrix;
 }
 
 double extractNumberFromFunction(string func, int startIndex) {
@@ -135,13 +220,13 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 		counterCols = 0;
 		counterRows++;
 	}
-	fstream calculation;
-	calculation.open("./resources/calculation.txt", std::fstream::out);
 	if (formatInput == 2) {
-		// to be implemented
-		jsonSerializer(matrix);
+		string path = "./resources/calculation.txt";
+		jsonSerializer(matrix,path,numbersCount,functionsCount);
 	}
 	else {
+		fstream calculation;
+		calculation.open("./resources/calculation.txt", std::fstream::out);
 		for (int i = 0; i < numbersCount; i++)
 		{
 			for (int j = 0; j < functionsCount; j++)
@@ -155,8 +240,8 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 			}
 			calculation << endl;
 		}
+		calculation.close();
 	}
-	calculation.close();
 	fstream resultCalc;
 	resultCalc.open("./resources/calculation.txt", std::fstream::in);
 	string result;

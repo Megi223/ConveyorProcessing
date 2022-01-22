@@ -11,7 +11,7 @@ public:
     ~Calculation();
     void calculate(char carryMode, int formatInput, char saveFileInput);
 private:
-    void jsonSerializer(double** matrix);
+    void jsonSerializer(double** matrix,string path,int numbersCnt,int funcCnt);
 };
 
 #endif
