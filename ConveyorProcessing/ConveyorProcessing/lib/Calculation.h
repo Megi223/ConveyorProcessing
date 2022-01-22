@@ -9,8 +9,7 @@ class Calculation {
 public:
     Calculation();
     ~Calculation();
-    void calcWithoutCarryMode(int formatInput, char saveFileInput);
-    void calcWithCarryMode(int formatInput, char saveFileInput);
+    void calculate(char carryMode, int formatInput, char saveFileInput);
 private:
     void jsonSerializer(double** matrix);
 };

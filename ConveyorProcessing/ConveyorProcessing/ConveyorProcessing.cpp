@@ -168,12 +168,7 @@ int main()
                 cout << "Invalid symbol! Please type in + for yes and - for no.";
                 cin >> saveFileInput;
             }
-            if (inputCarryMode == '-') {
-                calculation.calcWithoutCarryMode(formatInput,saveFileInput);
-            }
-            else {
-                calculation.calcWithCarryMode(formatInput, saveFileInput);
-            }
+            calculation.calculate(inputCarryMode, formatInput, saveFileInput);
             cout << endl;
             input = program.initMenu(false);
             symbol = validInput(user, input);
