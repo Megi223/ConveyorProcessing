@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project 1
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Miglena Dimitrova
+* @idnumber 2MI0600053
+* @compiler VC
+*
+* Program class declaration
+*
+*/
+
 #ifndef PROGRAM
 #define PROGRAM
 

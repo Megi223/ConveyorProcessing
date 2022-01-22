@@ -1,3 +1,17 @@
+/**
+*
+* Solution to course project 1
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Miglena Dimitrova
+* @idnumber 2MI0600053
+* @compiler VC
+*
+* Main() function file
+*
+*/
 
 #include <iostream>
 #include <cstring>
@@ -17,7 +31,6 @@ char validInput(User user,string input) {
     } while (symbol == 'e');
     return symbol;
 }
-
 
 int main()
 {
@@ -70,21 +83,12 @@ int main()
 
             } while (!successfulChange);
             cout << "You successfully changed the number " << currentNumber << " with " << changedNumber << endl;
-            cout << endl;
-            input = program.initMenu(false);
-            symbol = validInput(user, input);
         }
         else if (symbol == 'N' || symbol == 'n') {
             program.showNumbers();
-            cout << endl;
-            input = program.initMenu(false);
-            symbol = validInput(user, input);
         }
         else if (symbol == 'F' || symbol == 'f') {
             program.showFunctions();
-            cout << endl;
-            input = program.initMenu(false);
-            symbol = validInput(user, input);
         }
         else if (symbol == 'O' || symbol == 'o') {
             cout << "Okay! Now please write the function you want to change:" << endl;
@@ -128,9 +132,6 @@ int main()
             if (successful) {
                 cout << "Congratulations! You successfully changed function " << funcToChange << " with " << newFunc << endl;
             }
-            cout << endl;
-            input = program.initMenu(false);
-            symbol = validInput(user, input);
         }
         else if (symbol == 'C' || symbol == 'c') {
             /* When selecting this option the user will be able to choose from multiple 
@@ -169,13 +170,13 @@ int main()
                 cin >> saveFileInput;
             }
             calculation.calculate(inputCarryMode, formatInput, saveFileInput);
-            cout << endl;
-            input = program.initMenu(false);
-            symbol = validInput(user, input);
         }
+        cout << endl;
+        input = program.initMenu(false);
+        symbol = validInput(user, input);
     }
-    if (symbol == 'A' || symbol == 'a') {
-        cout << "Thank you for using Conveyor Processing! I hope you had great experience." << endl;
-    }
+
+    cout << "Thank you for using Conveyor Processing! I hope you had great experience." << endl;
+    
     return 0;
 }

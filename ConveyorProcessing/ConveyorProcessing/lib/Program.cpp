@@ -1,3 +1,17 @@
+/**
+*
+* Solution to course project 1
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Miglena Dimitrova
+* @idnumber 2MI0600053
+* @compiler VC
+*
+* Program class implementation
+*
+*/
 
 #include "Program.h"
 #include <iostream>
@@ -5,7 +19,6 @@
 #include <string>
 #include <iomanip>
 #include <vector>
-//using namespace std;
 
 // For testing purposes min value and max value are set
 const double MIN_VALUE_NUMBERS = -100;
@@ -245,8 +258,3 @@ int Program::checkFunctionContains(string func) {
 	functions.close();
 	return rowFound;
 }
-
-
-
-
-
