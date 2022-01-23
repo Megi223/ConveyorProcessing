@@ -32,6 +32,7 @@ public:
     void showFunctions();
     bool validateFormat(string str);
     int checkFunctionContains(string func);
+    bool validateNumberFormat(string inputNum);
 };
 
 #endif

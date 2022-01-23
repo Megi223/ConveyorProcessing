@@ -98,6 +98,25 @@ string Program::initMenu(bool first) {
 	return input;
 }
 
+bool Program::validateNumberFormat(string inputNum) {
+	int dotCounter = 0;
+	for (int i = 0; i < inputNum.size(); i++) {
+		if ((inputNum[i] < '0' || inputNum[i] > '9') && (inputNum[i] != '.' && inputNum[i] != '-')) {
+			return false;
+		}
+		if (inputNum[i] == '-' && i != 0) {
+			return false;
+		}
+		else if (inputNum[i] == '.') {
+			dotCounter++;
+		}
+	}
+	if (dotCounter > 1) {
+		return false;
+	}
+	return true;
+}
+
 bool Program::checkNumberContains(double number) {
 	fstream numbers;
 	numbers.open("./resources/numbers.txt", std::fstream::in);

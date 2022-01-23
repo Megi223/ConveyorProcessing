@@ -42,20 +42,22 @@ int main()
     char symbol = validInput(user,input);
     while (symbol != 'A' && symbol != 'a') {
         if (symbol == 'H' || symbol == 'h') {
-            cout << "Okay! Now please write the number you want to change" << endl;
-            float currentNumber = 0.0;
+            cout << "Okay! Now please write the number you want to change:" << endl;
+            double currentNumber = 0.0;
             double changedNumber = 0.0;
             bool contains = false;
+            string inputNumberToChange;
+            bool validNumber = false;
             do {
-                cin >> currentNumber;
+                cin >> inputNumberToChange;
                 /* This is for the cases when the user writes symbols different
                     from digits (ex.letters,special characters)*/
-                if (!cin) {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                validNumber = program.validateNumberFormat(inputNumberToChange);
+                if (!validNumber) {
                     cout << "Sorry, this is invalid input! Please select a number!" << endl;
                     continue;
                 }
+                currentNumber = stod(inputNumberToChange);
                 contains = program.checkNumberContains(currentNumber);
                 if (!contains) {
                     cout << "Sorry, this number is not part of the list. Please select a containing one!" << endl;
@@ -63,21 +65,22 @@ int main()
             } while (!contains);
             cout << "Great! Now please write your new number:" << endl;
             bool successfulChange = false;
+            bool validSecondNumber = false;
+            string newNumberInput;
             do {
-                cin >> changedNumber;
+                cin >> newNumberInput;
                 /* This is for the cases when the user writes symbols different
                     from digits (ex.letters,special characters)*/
-                if (!cin) {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                validSecondNumber = program.validateNumberFormat(newNumberInput);
+                if (!validSecondNumber) {
                     cout << "Sorry, this is invalid input! Please select a number!" << endl;
                     continue;
                 }
+                changedNumber = stod(newNumberInput);
                 successfulChange = user.changeNumber(currentNumber, changedNumber);
                 if (!successfulChange) {
                     cout << "Sorry, an error occured. Please write your number again" << endl;
                 }
-
             } while (!successfulChange);
             cout << "You successfully changed the number " << currentNumber << " with " << changedNumber << endl;
         }
