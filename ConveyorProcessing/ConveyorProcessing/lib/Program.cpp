@@ -212,7 +212,6 @@ int Program::checkFunctionContains(string func) {
 		// Converting it from string to double
 		double number = stod(numberStr);
 		result = number;
-		
 	}
 	// The operators ">>" and "<<" take up 2 characters and thus are separated into different cases
 	else if ((func[0] == '>' && func[1] == '>') || (func[0] == '<' && func[1] == '<')) {
@@ -233,7 +232,7 @@ int Program::checkFunctionContains(string func) {
 		if (currentFunc == '+' || currentFunc == '-' || currentFunc == '*' || currentFunc == '/' || currentFunc == '%') {
 			if (currentFunc == func[0]) {
 				// Determining what is the number standing next to the symbol for the operation
-				for (int i = 1; i < length; i++) {
+				for (int i = 1; i < buffer.size(); i++) {
 					currentNumberStr += buffer[i];
 				}
 				// Converting it from string to double
@@ -251,7 +250,7 @@ int Program::checkFunctionContains(string func) {
 		}
 		else if (currentFunc == '>' || currentFunc == '<') {
 			// Determining what is the number standing next to the symbol for the operation
-			for (int i = 2; i < length; i++) {
+			for (int i = 2; i < buffer.size(); i++) {
 				currentNumberStr += buffer[i];
 			}
 			// Converting it from string to integer (they work only with integers)

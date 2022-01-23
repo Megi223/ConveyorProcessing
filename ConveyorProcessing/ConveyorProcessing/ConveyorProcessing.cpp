@@ -19,6 +19,8 @@
 #include "lib/User.h"
 #include "lib/Calculation.h"
 
+using namespace std;
+
 char validInput(User user,string input) {
     char symbol;
     do {
@@ -116,10 +118,10 @@ int main()
             cin >> newFunc;
             bool formatCorrect = false;
             do {
-                formatCorrect = program.validateFormat(funcToChange);
-                if (!correct) {
+                formatCorrect = program.validateFormat(newFunc);
+                if (!formatCorrect) {
                     cout << "Invalid format!" << endl;
-                    cin >> funcToChange;
+                    cin >> newFunc;
                     continue;
                 }
             } while (!formatCorrect);
@@ -137,34 +139,33 @@ int main()
                 we pass them as parameters in order to get the desired result*/
             cout << "Great! But first let's clarify some options" << endl;
             cout << "Would you like to activate carry mode? Please type in + for yes and - for no." << endl;
-            char inputCarryMode;
-            cin >> inputCarryMode;
-            while (inputCarryMode != '+' && inputCarryMode != '-') {
-                cout << "Invalid symbol! Please type in + for yes and - for no.";
-                cin >> inputCarryMode;
+            string inputCarryModeStr;
+            cin >> inputCarryModeStr;
+            while ((inputCarryModeStr[0] != '+' && inputCarryModeStr[0] != '-') || inputCarryModeStr.size() > 1) {
+                cout << "Invalid input! Please type in + for yes and - for no." << endl;
+                cin >> inputCarryModeStr;
             }
+            char inputCarryMode = inputCarryModeStr[0];
             cout << "Now let's choose the format of the output. Would you like it to be plain text or JSON?" << endl;
             cout << "Please choose the corresponding option:" << endl;
             cout << "1 - plain text" << endl;
             cout << "2 - JSON" << endl;
-            int formatInput = 0;
-            cin >> formatInput;
-            while (cin.fail()) {
+            string formatInputStr;
+            cin >> formatInputStr;
+            while ((formatInputStr[0] != 49 && formatInputStr[0] != 50) || formatInputStr.size() > 1) {
                 cout << "Invalid input! Please choose a number (either 1 or 2)." << endl;
-                cin >> formatInput;
+                cin >> formatInputStr;
             }
-            while (formatInput != 1 && formatInput != 2) {
-                cout << "Invalid input! " << formatInput << " is neither 1 nor 2" << endl;
-                cin >> formatInput;
-            }
+            int formatInput = stod(formatInputStr);
             cout << "Fantastic! And finally- would you like to save the output as a file?" << endl;
             cout << "Please type in + for yes and - for no." << endl;
-            char saveFileInput;
-            cin >> saveFileInput;
-            while (saveFileInput != '+' && saveFileInput != '-') {
-                cout << "Invalid symbol! Please type in + for yes and - for no.";
-                cin >> saveFileInput;
+            string saveFileInputStr;
+            cin >> saveFileInputStr;
+            while ((saveFileInputStr[0] != '+' && saveFileInputStr[0] != '-') || saveFileInputStr.size() > 1) {
+                cout << "Invalid input! Please type in + for yes and - for no." << endl;
+                cin >> saveFileInputStr;
             }
+            char saveFileInput = saveFileInputStr[0];
             calculation.calculate(inputCarryMode, formatInput, saveFileInput);
         }
         cout << endl;
