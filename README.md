@@ -9,6 +9,7 @@
  - At the start of the program,random numbers and functions are generated
  - Then, the user can choose one of the following commands by selecting a corresponding letter
 ![https://res.cloudinary.com/dpwroiluv/image/upload/v1642931660/projectImage_fxdnkb.png](https://res.cloudinary.com/dpwroiluv/image/upload/v1642931660/projectImage_fxdnkb.png)
+
 **See all numbers** - prints the generated numbers from a file,where they are saved
 **Change one number** - gives the user the ability to change a number from the list with one of their wish (validation of the format of numbers and whether it is present in the list of already generated numbers)
 **See all functions** - prints the generated functions from a file,where they are saved
