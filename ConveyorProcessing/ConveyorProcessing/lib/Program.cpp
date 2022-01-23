@@ -27,16 +27,13 @@ const double MAX_VALUE_NUMBERS = 100;
 const int MIN_VALUE_FUNCTIONS = 0;
 const int MAX_VALUE_FUNCTIONS = 6;
 
-Program::Program()
-{
+Program::Program() {
 }
 
-Program::~Program()
-{
+Program::~Program() {
 }
 
-void Program::generateRandomNumbers()
-{
+void Program::generateRandomNumbers() {
 	fstream numbers;
 	numbers.open("./resources/numbers.txt", std::fstream::out);
 	srand(time(0));
@@ -149,10 +146,8 @@ bool Program::validateFormat(string arr) {
 		correct = false;
 		return correct;
 	}
-	if (arr[0] == '+' || arr[0] == '-' || arr[0] == '*' || arr[0] == '/' || arr[0] == '%')
-	{
-		for (int i = 1; i < length; i++)
-		{
+	if (arr[0] == '+' || arr[0] == '-' || arr[0] == '*' || arr[0] == '/' || arr[0] == '%') {
+		for (int i = 1; i < length; i++) {
 			char currentSymbol = arr[i];
 			if (i == 1 && currentSymbol == '-') {
 				continue;
@@ -166,8 +161,7 @@ bool Program::validateFormat(string arr) {
 	}
 	else if ((arr[0] == '>' && arr[1] == '>') || (arr[0] == '<' && arr[1] == '<')) {
 		// The next (length-2) symbols should be a valid number in order for the whole input to be valid
-		for (int i = 2; i < length; i++)
-		{
+		for (int i = 2; i < length; i++) {
 			char currentSymbol = arr[i];
 			// Checking if it is a digit or dot (ascii table values) - if it isn't- the input becomes invalid
 			if (currentSymbol < 48 || currentSymbol > 57) {
@@ -191,11 +185,9 @@ int Program::checkFunctionContains(string func) {
 	functions.open("./resources/functions.txt", std::fstream::in);
 	std::string buffer;
 	double result = 0;
-	if (func[0] == '+' || func[0] == '-' || func[0] == '*' || func[0] == '/' || func[0] == '%') 
-	{
+	if (func[0] == '+' || func[0] == '-' || func[0] == '*' || func[0] == '/' || func[0] == '%') {
 		// Determining what is the number standing next to the symbol for the operation
-		for (int i = 1; i < length; i++)
-		{
+		for (int i = 1; i < length; i++) {
 			numberStr += func[i];
 		}
 		// Converting it from string to double
@@ -206,8 +198,7 @@ int Program::checkFunctionContains(string func) {
 	// The operators ">>" and "<<" take up 2 characters and thus are separated into different cases
 	else if ((func[0] == '>' && func[1] == '>') || (func[0] == '<' && func[1] == '<')) {
 		// Determining what is the number standing next to the symbol for the operation
-		for (int i = 2; i < length; i++)
-		{
+		for (int i = 2; i < length; i++) {
 			numberStr += func[i];
 		}
 		// Converting it from string to int (they work only with integers)
@@ -223,8 +214,7 @@ int Program::checkFunctionContains(string func) {
 		if (currentFunc == '+' || currentFunc == '-' || currentFunc == '*' || currentFunc == '/' || currentFunc == '%') {
 			if (currentFunc == func[0]) {
 				// Determining what is the number standing next to the symbol for the operation
-				for (int i = 1; i < length; i++)
-				{
+				for (int i = 1; i < length; i++) {
 					currentNumberStr += buffer[i];
 				}
 				// Converting it from string to double
@@ -242,8 +232,7 @@ int Program::checkFunctionContains(string func) {
 		}
 		else if (currentFunc == '>' || currentFunc == '<') {
 			// Determining what is the number standing next to the symbol for the operation
-			for (int i = 2; i < length; i++)
-			{
+			for (int i = 2; i < length; i++) {
 				currentNumberStr += buffer[i];
 			}
 			// Converting it from string to integer (they work only with integers)

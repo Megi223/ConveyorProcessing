@@ -27,6 +27,8 @@ public:
     void calculate(char carryMode, int formatInput, char saveFileInput);
 private:
     void jsonSerializer(double** matrix,string path,int numbersCnt,int funcCnt);
+    double extractNumberFromFunction(string func, int startIndex);
+    int countLines(string path);
 };
 
 #endif

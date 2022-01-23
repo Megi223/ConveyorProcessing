@@ -20,12 +20,10 @@
 #include <iomanip>
 #include <vector>
 
-Calculation::Calculation()
-{
+Calculation::Calculation() {
 }
 
-Calculation::~Calculation()
-{
+Calculation::~Calculation() {
 }
 
 void Calculation::jsonSerializer(double** matrix,string path,int numbersCount,int functionsCount) {
@@ -33,11 +31,9 @@ void Calculation::jsonSerializer(double** matrix,string path,int numbersCount,in
 	calc.open("./resources/calculation.txt", std::fstream::out);
 	calc << '{' << endl;
 	calc << "	\"byRows\": [" << endl;
-	for (int i = 0; i < numbersCount; i++)
-	{
+	for (int i = 0; i < numbersCount; i++) {
 		calc << "		[";
-		for (int j = 0; j < functionsCount; j++)
-		{
+		for (int j = 0; j < functionsCount; j++) {
 			if (trunc(matrix[i][j]) == matrix[i][j]) {
 				if (j == functionsCount - 1) {
 					calc << (int)matrix[i][j];
@@ -70,18 +66,15 @@ void Calculation::jsonSerializer(double** matrix,string path,int numbersCount,in
 	for (int i = 0; i < functionsCount; ++i) {
 		transponseMatrix[i] = new double[numbersCount];
 	}
-	for (int fCnt = 0; fCnt < functionsCount; fCnt++)
-	{
-		for (int nCnt = 0; nCnt < numbersCount; nCnt++)
-		{
+	for (int fCnt = 0; fCnt < functionsCount; fCnt++) {
+		for (int nCnt = 0; nCnt < numbersCount; nCnt++) {
 			transponseMatrix[fCnt][nCnt] = matrix[nCnt][fCnt];
 		}
 	}
 	for (int i = 0; i < functionsCount; i++)
 	{
 		calc << "		[";
-		for (int j = 0; j < numbersCount; j++)
-		{
+		for (int j = 0; j < numbersCount; j++) {
 			if (trunc(transponseMatrix[i][j]) == transponseMatrix[i][j]) {
 				if (j == numbersCount - 1) {
 					calc << (int)transponseMatrix[i][j];
@@ -117,11 +110,10 @@ void Calculation::jsonSerializer(double** matrix,string path,int numbersCount,in
 	delete[] transponseMatrix;
 }
 
-double extractNumberFromFunction(string func, int startIndex) {
+double Calculation::extractNumberFromFunction(string func, int startIndex) {
 	string numberStr;
 	// Determining what is the number standing next to the symbol for the operation
-	for (int i = startIndex; i < func.size(); i++)
-	{
+	for (int i = startIndex; i < func.size(); i++) {
 		numberStr += func[i];
 	}
 	// Converting it from string to double
@@ -129,7 +121,7 @@ double extractNumberFromFunction(string func, int startIndex) {
 	return number;
 }
 
-int countLines(string path) {
+int Calculation::countLines(string path) {
 	fstream file;
 	file.open(path, std::fstream::in);
 	int counter = 0;
@@ -179,8 +171,7 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 
 			if (sign == '+' || sign == '-' || sign == '*' || sign == '/' || sign == '%') {
 				numberAfterSign = extractNumberFromFunction(currentFunc, 1);
-				switch (sign)
-				{
+				switch (sign) {
 				case '+': result = currentNumber + numberAfterSign; break;
 				case '-': result = currentNumber - numberAfterSign; break;
 				case '*': result = currentNumber * numberAfterSign; break;
@@ -204,7 +195,6 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 					}
 				}
 			}
-
 			else if (sign == '>') {
 				numberAfterSign = extractNumberFromFunction(currentFunc, 2);
 				if (trunc(currentNumber) == currentNumber) {
@@ -242,10 +232,8 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 	else {
 		fstream calculation;
 		calculation.open("./resources/calculation.txt", std::fstream::out);
-		for (int i = 0; i < numbersCount; i++)
-		{
-			for (int j = 0; j < functionsCount; j++)
-			{
+		for (int i = 0; i < numbersCount; i++) {
+			for (int j = 0; j < functionsCount; j++) {
 				if (trunc(matrix[i][j]) == matrix[i][j]) {
 					calculation << setw(10) << (int)matrix[i][j] << ' ';
 				}
@@ -265,12 +253,10 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 	}
 	resultCalc.close();
 	if (saveFileInput == '-') {
-		try
-		{
+		try {
 			bool successfulRemove = remove("./resources/calculation.txt");
 		}
-		catch (const std::exception&)
-		{
+		catch (const std::exception&) {
 			cout << "An error occured";
 		}
 	}
@@ -278,14 +264,10 @@ void Calculation::calculate(char carryMode, int formatInput, char saveFileInput)
 		cout << "You can find it saved as a file, too." << endl;
 	}
 
-	for (int i = 0; i < numbersCount; i++)
-	{
+	for (int i = 0; i < numbersCount; i++) {
 		delete[] matrix[i];
 	}
 	delete[] matrix;
 	numbers.close();
 	functions.close();
 }
-
-
-

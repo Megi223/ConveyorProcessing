@@ -19,12 +19,10 @@
 
 int const VALID_SYMBOLS_COUNT = 12;
 
-User::User()
-{
+User::User() {
 }
 
-User::~User()
-{
+User::~User() {
 }
 
 int User::strLength(string str) {
@@ -36,8 +34,8 @@ int User::strLength(string str) {
 	length = i;
 	return length;
 }
-char User::validateInputStartMenu(string input)
-{
+
+char User::validateInputStartMenu(string input) {
 	int length = strLength(input);
 	if (length != 1) {
 		return 'e';
@@ -45,8 +43,7 @@ char User::validateInputStartMenu(string input)
 	char symbol = input[0];
 	char validSymbols[VALID_SYMBOLS_COUNT] = { 'N', 'n', 'H', 'h', 'F', 'f', 'O', 'o', 'C', 'c', 'A', 'a' };
 	bool isValid = false;
-	for (int i = 0; i < VALID_SYMBOLS_COUNT; i++)
-	{
+	for (int i = 0; i < VALID_SYMBOLS_COUNT; i++) {
 		if (symbol == validSymbols[i]) {
 			isValid = true;
 		}
@@ -63,8 +60,7 @@ bool User::changeNumber(double oldNum,double newNum) {
 	ifstream filein("./resources/numbers.txt"); 
 	//Temporary file to write new numbers
 	ofstream fileout("./resources/tempNumbers.txt"); 
-	if (!filein || !fileout)
-	{
+	if (!filein || !fileout) {
 		cout << "Error opening files!" << endl;
 		return false;
 	}
@@ -100,8 +96,7 @@ bool User::substituteFunction(string newFunc, int row) {
 	ifstream filein("./resources/functions.txt");
 	//Temporary file to write new functions
 	ofstream fileout("./resources/tempFunctions.txt");
-	if (!filein || !fileout)
-	{
+	if (!filein || !fileout) {
 		cout << "Error opening files!" << endl;
 		return false;
 	}

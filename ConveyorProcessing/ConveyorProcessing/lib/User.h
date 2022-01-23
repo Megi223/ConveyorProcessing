@@ -27,7 +27,6 @@ public:
     char validateInputStartMenu(string input);
     bool changeNumber(double oldNum, double newNum);
     bool substituteFunction(string newFunc, int row);
-
 private: 
     int strLength(string str);
 };

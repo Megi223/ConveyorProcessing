@@ -21,8 +21,7 @@
 
 char validInput(User user,string input) {
     char symbol;
-    do
-    {
+    do {
         symbol = user.validateInputStartMenu(input);
         if (symbol == 'e') {
             cout << "This is an invalid operation! Please select a valid one!" << endl;
@@ -47,8 +46,7 @@ int main()
             float currentNumber = 0.0;
             double changedNumber = 0.0;
             bool contains = false;
-            do
-            {
+            do {
                 cin >> currentNumber;
                 /* This is for the cases when the user writes symbols different
                     from digits (ex.letters,special characters)*/
@@ -65,8 +63,7 @@ int main()
             } while (!contains);
             cout << "Great! Now please write your new number:" << endl;
             bool successfulChange = false;
-            do
-            {
+            do {
                 cin >> changedNumber;
                 /* This is for the cases when the user writes symbols different
                     from digits (ex.letters,special characters)*/
@@ -97,8 +94,7 @@ int main()
             bool correct = false;
             // Represents the row in which the function can be found - if it is not part of the list this index will be -1 (invalid)
             int contains = -1;
-            do
-            {
+            do {
                correct = program.validateFormat(funcToChange);
                if (!correct) {
                    cout << "Invalid format!" << endl;
@@ -116,8 +112,7 @@ int main()
             string newFunc;
             cin >> newFunc;
             bool formatCorrect = false;
-            do
-            {
+            do {
                 formatCorrect = program.validateFormat(funcToChange);
                 if (!correct) {
                     cout << "Invalid format!" << endl;
@@ -141,8 +136,7 @@ int main()
             cout << "Would you like to activate carry mode? Please type in + for yes and - for no." << endl;
             char inputCarryMode;
             cin >> inputCarryMode;
-            while (inputCarryMode != '+' && inputCarryMode != '-')
-            {
+            while (inputCarryMode != '+' && inputCarryMode != '-') {
                 cout << "Invalid symbol! Please type in + for yes and - for no.";
                 cin >> inputCarryMode;
             }
@@ -164,8 +158,7 @@ int main()
             cout << "Please type in + for yes and - for no." << endl;
             char saveFileInput;
             cin >> saveFileInput;
-            while (saveFileInput != '+' && saveFileInput != '-')
-            {
+            while (saveFileInput != '+' && saveFileInput != '-') {
                 cout << "Invalid symbol! Please type in + for yes and - for no.";
                 cin >> saveFileInput;
             }
